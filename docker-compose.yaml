@@ -11,8 +11,7 @@ services:
   db:
     image: mysql:5.7
     environment:
-      - MYSQL_DATABASE=reco_dev
-      - MYSQL_ROOT_PASSWORD=5w1h3581
+      - MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     command: >
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_general_ci
