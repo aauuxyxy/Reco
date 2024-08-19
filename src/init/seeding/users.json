@@ -1,0 +1,23 @@
+[
+  {
+    "Auth_id": "auth_001",
+    "Name": "Alice Johnson",
+    "Bio": "Lover of technology and coffee.",
+    "Birth_date": "1990-05-15T00:00:00Z",
+    "Profile_image": "https://example.com/images/alice.jpg"
+  },
+  {
+    "Auth_id": "auth_002",
+    "Name": "Bob Smith",
+    "Bio": "Traveler and photographer.",
+    "Birth_date": "1985-09-23T00:00:00Z",
+    "Profile_image": "https://example.com/images/bob.jpg"
+  },
+  {
+    "Auth_id": "auth_003",
+    "Name": "Charlie Brown",
+    "Bio": "Food enthusiast and blogger.",
+    "Birth_date": "1992-12-01T00:00:00Z",
+    "Profile_image": "https://example.com/images/charlie.jpg"
+  }
+]
