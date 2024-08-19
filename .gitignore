@@ -1,1 +1,11 @@
 .env.local
+
+env
+
+tmp
+
+Docker/MySQL/init
+Docker/MySQL/my.conf
+db-vol
+
+pre_cmd.txt

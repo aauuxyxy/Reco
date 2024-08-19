@@ -5,6 +5,7 @@ go 1.23.0
 require github.com/gin-gonic/gin v1.10.0
 
 require (
+	github.com/auth0/go-auth0 v1.9.0 // indirect
 	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect

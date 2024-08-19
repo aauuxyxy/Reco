@@ -1,22 +1,29 @@
-version: "3"
+version: "3.9"
 services:
-  app:
-    build: .
-    depends_on:
-      - db
-    volumes:
-      - ./:/go/src/app
-    tty: true
-
-  db:
-    image: mysql:5.7
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-    command: >
-      --character-set-server=utf8mb4
-      --collation-server=utf8mb4_general_ci
-      --innodb_file_per_table
-      --innodb_file_format=BARRACUDA
-      --innodb_large_prefix=1
+  go:
+    container_name: reco_api
+    build:
+      context: .
+      dockerfile: ./Docker/Go/Dockerfile
     ports:
-      - 3306:3306
+      - "8080:8080"
+    links:
+      - mysql
+    tty: true
+    volumes:
+      - ./src:/app
+  mysql:
+    container_name: reco_db
+    build:
+      context: .
+      dockerfile: ./Docker/MySQL/Dockerfile
+    hostname: reco_db
+    env_file:
+      - ./Docker/MySQL/env
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --skip-character-set-client-handshake
+    volumes:
+      - ./db-vol:/var/lib/mysql
+      - ./Docker/MySQL/my.conf:/etc/mysql/my.conf
+      - ./Docker/MySQL/init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
