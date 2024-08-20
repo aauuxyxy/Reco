@@ -39,9 +39,7 @@ func newValidationKeyGetter(domain, clientID string, jwks *JWKS) func(*jwt.Token
         // issフィールドを見て、正しいトークン発行者か確認する
         iss := fmt.Sprintf("https://%s/", domain)
         ok = token.Claims.(jwt.MapClaims).VerifyIssuer(iss, true)
-        if !checkIss {
-            return nil, errors.New("invalid issuer")
-        }
+
 
         // JWTの検証に必要な鍵を生成する
         cert, err := getPemCert(jwks, token)

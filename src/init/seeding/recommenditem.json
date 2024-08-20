@@ -1,0 +1,23 @@
+[
+  {
+    "Product_name": "Smartphone XYZ",
+    "Detail": "Latest model with high performance and sleek design.",
+    "Category": "Electronics",
+    "Link": "https://example.com/products/smartphone_xyz",
+    "Image": "https://example.com/images/smartphone_xyz.jpg"
+  },
+  {
+    "Product_name": "Wireless Headphones",
+    "Detail": "Noise-cancelling headphones with long battery life.",
+    "Category": "Audio",
+    "Link": "https://example.com/products/wireless_headphones",
+    "Image": "https://example.com/images/wireless_headphones.jpg"
+  },
+  {
+    "Product_name": "Laptop ABC",
+    "Detail": "High-performance laptop for gaming and productivity.",
+    "Category": "Computers",
+    "Link": "https://example.com/products/laptop_abc",
+    "Image": "https://example.com/images/laptop_abc.jpg"
+  }
+]
