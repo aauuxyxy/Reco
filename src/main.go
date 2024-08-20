@@ -2,6 +2,7 @@ package main
 
 import (
 	migrate "Reco-server/src/init"
+	"Reco-server/src/init/model"
 	"Reco-server/src/init/seeding"
 	"Reco-server/src/pkg/database"
 	"log"
@@ -24,11 +25,12 @@ func main() {
 
     // ルーティング
     r := gin.Default()
-    r.GET("/api/data", func(c *gin.Context) {
-        response := gin.H{
-            "message": "Hello World!",
-        }
-        c.JSON(http.StatusOK, response)
+    r.GET("/all_users", func(c *gin.Context) {
+        var users []model.Users
+        db.Find(&users)
+
+        c.JSON(http.StatusOK, users)
     })
+
     r.Run()
 }

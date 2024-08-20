@@ -16,13 +16,13 @@ func CreateSeed[T any](db *gorm.DB, filePath string, checkExistsFn func(db *gorm
 	// seedデータが存在する場合は何も実行しない
 	var count int64
 
-	db.Model(&model.Users{}).Count(&count)
+	db.Model(new(T)).Count(&count)
 	if count > 0 {
 		return nil
 	}
 
-	// JSONファイルを読み込む
-	file, err := os.Open(filePath)
+	// JSONファイルを読み込む(パスはDocker内のパス)
+	file, err := os.Open("/app/init/seeding/" + filePath)
 	if err != nil {
 		return fmt.Errorf("failed to open file: %w", err)
 	}
@@ -57,7 +57,7 @@ func CreateSeed[T any](db *gorm.DB, filePath string, checkExistsFn func(db *gorm
 		}
 	}
 
-	fmt.Println("Seeding completed successfully.")
+	fmt.Println("Seeding completed " + filePath)
 	return nil
 }
 
@@ -75,13 +75,13 @@ func Seeder(db *gorm.DB) {
 		fmt.Printf("Error seeding data: %v\n", err)
 	}
 
-	// Tweets
-	if err := CreateSeed[model.Tweets](db, "tweets.json",checkUserExists); err != nil {
+	// RecommendItem
+	if err := CreateSeed[model.RecommendItem](db, "recommenditem.json",checkUserExists); err != nil {
 		fmt.Printf("Error seeding data: %v\n", err)
 	}
 
-	// RecommendItem
-	if err := CreateSeed[model.RecommendItem](db, "recommenditem.json",checkUserExists); err != nil {
+	// Tweets
+	if err := CreateSeed[model.Tweets](db, "tweets.json",checkUserExists); err != nil {
 		fmt.Printf("Error seeding data: %v\n", err)
 	}
 
