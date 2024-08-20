@@ -1,0 +1,48 @@
+version: "3.9"
+services:
+  mysql:
+    container_name: reco_db
+    build:
+      context: .
+      dockerfile: ./Docker/MySQL/Dockerfile
+    hostname: reco_db
+    env_file:
+      - ./Docker/MySQL/env
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --skip-character-set-client-handshake
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-u",
+          "root",
+          "-p$MYSQL_PASSWORD",
+        ]
+      interval: 3s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    volumes:
+      - ./db-vol:/var/lib/mysql
+      - ./Docker/MySQL/my.conf:/etc/mysql/my.conf
+      - ./Docker/MySQL/init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+  go:
+    container_name: reco_api
+    build:
+      context: .
+      dockerfile: ./Docker/Go/Dockerfile
+    ports:
+      - "8080:8080"
+    links:
+      - mysql
+    tty: true
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./src:/app
