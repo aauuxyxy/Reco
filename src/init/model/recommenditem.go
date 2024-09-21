@@ -12,5 +12,7 @@ type RecommendItem struct {
 	Category string
 	Link string
 	Image string
+	Price int
+	ItemTagID uint
 	Tweets *[]Tweets `gorm:"foreignKey:RecommendItemID"`
 }
